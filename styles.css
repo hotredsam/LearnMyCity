@@ -11,39 +11,52 @@ h1 {
     margin-bottom: 20px;
 }
 
-#trivia-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-#options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+.questionBox {
+    height: 50vh;
+    text-align: center;
+    background-color: #f3f3f3;
+    padding: 20px;
     margin-bottom: 20px;
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.button {
+    margin: 5px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #5e5e5e;
     border: none;
-    padding: 10px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+.button:hover {
+    background-color: #000000;
 }
 
-#map {
-    height: 500px;
-    width: 100%;
+.button:active {
+    background-color: #004085;
 }
 
-.distance-overlay {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 5px 10px;
-    border-radius: 3px;
+.answersBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    /* You can change this value to a fixed height that suits your needs */
+    max-height: 60%;
+    /* This line will limit the height of the div to a maximum of 60% of its parent container */
+    text-align: center;
+    background-color: #ffffff;
+    padding: 5%;
+    margin-bottom: 5%;
 }
