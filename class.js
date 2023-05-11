@@ -1,11 +1,13 @@
 export default class QuestionBlock {
-  constructor(question, answers, correctAnswer) {
+  constructor(question, answers) {
     this.question = question;
     this.answers = answers;
-    this.correctAnswer = correctAnswer;
-  }
-  correctAnswer() {
-    const date = new Date();
-    return date.getFullYear() - this.year;
+    for (let i = 0; i < answers.length; i++) {
+      console.log("Checking answer:", answers[i]);
+      if (answers[i].indexOf("*") > 0) {
+        this.correctAnswer = answers[i];
+        console.log("Found correct answer:", answers[i]);
+      }
+    }
   }
 }

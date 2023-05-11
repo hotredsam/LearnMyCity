@@ -48,7 +48,7 @@ async function getCoordinates() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+                "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
             },
             body: JSON.stringify({
                 model: "gpt-4",
@@ -74,7 +74,7 @@ async function makeQuestions() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+            "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
         },
         body: JSON.stringify({
             model: "gpt-4",
@@ -95,15 +95,19 @@ let objectArray = [10]
         let question = arr[i*6+15]
         let answers = []
         for (let j=1; j<5; j++){
-            answers[j] = arr[i*6+15+j]
+            answers[j-1] = arr[i*6+15+j]
             console.log(i*6+15+j)
 
         }
         objectArray[i] = new QuestionBlock (question, answers)
     }
 
+for (let index = 0; index < objectArray.length; index++) {
+    console.log(objectArray[index]);
+    
+}
 
-console.log(objectArray[6])
+
 
     // for (i = 0; i < 10; i++) {
     //     objectArray[i] = new Object();
