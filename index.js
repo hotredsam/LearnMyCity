@@ -1,4 +1,6 @@
+import QuestionBlock from './class.js';
 
+// const {QuestionBlock} = require('./class')
 let latitude = "";
 let longitude = "";
 
@@ -46,7 +48,7 @@ async function getCoordinates() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+                "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
             },
             body: JSON.stringify({
                 model: "gpt-4",
@@ -72,7 +74,7 @@ async function makeQuestions() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+            "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
         },
         body: JSON.stringify({
             model: "gpt-4",
@@ -87,9 +89,21 @@ async function makeQuestions() {
     const arr = str.split("\n");
     console.log(arr);
 
-    // let objectArray = [];
+let objectArray = [10]
 
-    // const maxAnswers = 4;
+    for (let i = 0; i<10; i++){
+        let question = arr[i*6+15]
+        let answers = []
+        for (let j=1; j<5; j++){
+            answers[j] = arr[i*6+15+j]
+            console.log(i*6+15+j)
+
+        }
+        objectArray[i] = new QuestionBlock (question, answers)
+    }
+
+
+console.log(objectArray[6])
 
     // for (i = 0; i < 10; i++) {
     //     objectArray[i] = new Object();
