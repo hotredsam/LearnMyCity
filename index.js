@@ -48,7 +48,7 @@ async function getCoordinates() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+                "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
             },
             body: JSON.stringify({
                 model: "gpt-4",
@@ -74,7 +74,7 @@ async function makeQuestions() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+            "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
         },
         body: JSON.stringify({
             model: "gpt-4",
@@ -89,23 +89,23 @@ async function makeQuestions() {
     const arr = str.split("\n");
     console.log(arr);
 
-let objectArray = [10]
+    let objectArray = [10]
 
-    for (let i = 0; i<10; i++){
-        let question = arr[i*6+15]
+    for (let i = 0; i < 10; i++) {
+        let question = arr[i * 6 + 15]
         let answers = []
-        for (let j=1; j<5; j++){
-            answers[j-1] = arr[i*6+15+j]
-            console.log(i*6+15+j)
+        for (let j = 1; j < 5; j++) {
+            answers[j - 1] = arr[i * 6 + 15 + j]
+            console.log(i * 6 + 15 + j)
 
         }
-        objectArray[i] = new QuestionBlock (question, answers)
+        objectArray[i] = new QuestionBlock(question, answers)
     }
 
-for (let index = 0; index < objectArray.length; index++) {
-    console.log(objectArray[index]);
-    
-}
+    for (let index = 0; index < objectArray.length; index++) {
+        console.log(objectArray[index]);
+        return objectArray;
+    }
 
 
 
@@ -118,5 +118,71 @@ for (let index = 0; index < objectArray.length; index++) {
     // }
 }
 
+let questions = [];
+
+makeQuestions().then(result => {
+    questions = result;
+    updateQuestion(0);
+});
+
+let currentQuestionIndex = 0;
+
+function updateQuestion(index) {
+    const question = questions[index];
+    document.querySelector(".questionBox h2").textContent = question.question;
+    const answersBox = document.querySelector(".answersBox");
+    answersBox.innerHTML = ''; // clear existing answers
+
+    question.answers.forEach((answer, i) => {
+        const p = document.createElement('p');
+        p.textContent = answer;
+        // Add a click event listener to each paragraph
+        p.addEventListener('click', () => {
+            // Remove any existing color classes
+            answersBox.querySelectorAll('p').forEach(el => {
+                el.classList.remove('correct');
+                el.classList.remove('incorrect');
+            });
+            // Add the correct color class
+            if (i === question.correctAnswer) {
+                p.classList.add('correct');
+                question.correct = true;
+            } else {
+                p.classList.add('incorrect');
+                question.correct = false;
+                // Also color the correct answer green
+                answersBox.childNodes[question.correctAnswer].classList.add('correct');
+            }
+        });
+        answersBox.appendChild(p);
+    });
+
+    // Update progress bar
+    let progress = document.getElementById('file');
+    progress.max = questions.length;  // Set the max value to the total number of questions
+    progress.value = index + 1;  // Set the current value to the current question number
+}
+
+document.querySelector("#previous-question").addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        updateQuestion(currentQuestionIndex);
+    }
+});
+
+document.querySelector("#next-question").addEventListener('click', () => {
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        updateQuestion(currentQuestionIndex);
+    }
+
+    if (currentQuestionIndex === questions.length - 1) {
+        document.querySelector("#next-question").textContent = "Submit";
+    }
+});
+
+
+
+
 getCoordinates();
-makeQuestions();
+// makeQuestions();
