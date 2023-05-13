@@ -203,3 +203,21 @@ body {
 #final-screen .button:hover {
     background-color: #45a049;
 }
+
+.game-title {
+    font-family: 'Fascinate Inline', cursive;
+    /* You can replace this with any interesting font you like. */
+    font-size: 3em;
+    text-align: center;
+}
+
+.instructions {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.instructions h3 {
+    margin-bottom: 10px;
+}

@@ -6,14 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia Game</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
 
     <div id="loading-screen" style="display: none;">
+        <h1 class="game-title">GeoGuesser</h1>
         <h2>Loading...</h2>
-        <p id="timer">90</p>
+        <div id="timer-message">
+            <span id="timer"></span>
+            <span id="location-message" style="display: none;">Turn on your location to play the game.</span>
+        </div>
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <p>1. Read the question provided on the screen.</p>
+            <p>2. Click on the answer that you think is correct.</p>
+            <p>3. Your score will be updated based on your answer.</p>
+            <p>4. Click "Next Question" to proceed to the next question.</p>
+            <p>5. At the end of the game, your final score will be displayed.</p>
+        </div>
     </div>
     <div id="play-screen" style="display: none;">
         <button id="play-button">Play!</button>
