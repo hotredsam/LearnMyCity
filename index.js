@@ -1,8 +1,11 @@
 import QuestionBlock from './class.js';
+import apiKey from './ApiKey.js';
 
+// let apiKey = process.env.OPENAI_API_KEY;
 // const {QuestionBlock} = require('./class')
 let latitude = "";
 let longitude = "";
+let score = 0;
 
 // const configuration = new Configuration({
 //     organization: "org-TqEpdlmkfsBxbmm8zCNbwlWm",
@@ -48,7 +51,7 @@ async function getCoordinates() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+                "Authorization": "Bearer " + apiKey, // Replace with your actual OpenAI API key
             },
             body: JSON.stringify({
                 model: "gpt-4",
@@ -74,7 +77,7 @@ async function makeQuestions() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "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", // Replace with your actual OpenAI API key
+            "Authorization": "Bearer " + apiKey, // Replace with your actual OpenAI API key
         },
         body: JSON.stringify({
             model: "gpt-4",
@@ -92,21 +95,23 @@ async function makeQuestions() {
     let objectArray = [10]
 
     for (let i = 0; i < 10; i++) {
-        let question = arr[i * 6 + 15]
-        let answers = []
+        let question = arr[i * 6 + 15];
+        let answers = [];
         for (let j = 1; j < 5; j++) {
-            answers[j - 1] = arr[i * 6 + 15 + j]
-            console.log(i * 6 + 15 + j)
-
+            answers[j - 1] = arr[i * 6 + 15 + j];
         }
-        objectArray[i] = new QuestionBlock(question, answers)
+        let cityName = str.split("\n")[i + 2]; // get the first word of the question
+        objectArray[i] = new QuestionBlock(question, answers, cityName);
+        console.log('Created new QuestionBlock:', objectArray[i]);  // Log the new QuestionBlock
     }
+
 
     for (let index = 0; index < objectArray.length; index++) {
         console.log(objectArray[index]);
-        return objectArray;
+
     }
 
+    return objectArray;
 
 
     // for (i = 0; i < 10; i++) {
@@ -138,6 +143,9 @@ function updateQuestion(index) {
         p.textContent = answer;
         // Add a click event listener to each paragraph
         p.addEventListener('click', () => {
+            if (question.answered) { // If the question has already been answered, do nothing
+                return;
+            }
             // Remove any existing color classes
             answersBox.querySelectorAll('p').forEach(el => {
                 el.classList.remove('correct');
@@ -147,12 +155,19 @@ function updateQuestion(index) {
             if (i === question.correctAnswer) {
                 p.classList.add('correct');
                 question.correct = true;
+                score++;  // increase the score
             } else {
                 p.classList.add('incorrect');
                 question.correct = false;
                 // Also color the correct answer green
                 answersBox.childNodes[question.correctAnswer].classList.add('correct');
             }
+            question.answered = true;  // mark the question as answered
+            answersBox.querySelectorAll('p').forEach(el => {
+                el.classList.add('answered');
+            });
+            // Update the score display
+            document.getElementById('score').textContent = `Score: ${score}/${currentQuestionIndex + 1}`;
         });
         answersBox.appendChild(p);
     });
@@ -163,13 +178,6 @@ function updateQuestion(index) {
     progress.value = index + 1;  // Set the current value to the current question number
 }
 
-document.querySelector("#previous-question").addEventListener('click', () => {
-    if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        updateQuestion(currentQuestionIndex);
-    }
-});
-
 document.querySelector("#next-question").addEventListener('click', () => {
     if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
@@ -177,12 +185,69 @@ document.querySelector("#next-question").addEventListener('click', () => {
     }
 
     if (currentQuestionIndex === questions.length - 1) {
-        document.querySelector("#next-question").textContent = "Submit";
+        // Hide the quiz screen and show the final page
+        document.querySelector("#quiz-screen").style.display = 'none';
+        document.querySelector("#final-screen").style.display = 'block';
+
+        // Calculate the final score and display it
+        document.querySelector("#final-score").textContent = `Your final score is: ${score}/10`;
+    }
+    let citiesList = document.querySelector("#cities-list");
+    citiesList.innerHTML = '';  // Clear the list
+    console.log('questions array:', questions);  // Log the questions array
+
+    for (let i = 0; i < questions.length; i++) {
+        let listItem = document.createElement('li');
+        let cityName = questions[i].cityName;
+        listItem.textContent = cityName;
+        citiesList.appendChild(listItem);
     }
 });
 
 
 
 
+window.onload = function () {
+    const loadingScreen = document.getElementById('loading-screen');
+    const playScreen = document.getElementById('play-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+
+    // Show the loading screen
+    loadingScreen.style.display = 'block';
+
+    // Start the countdown
+    let timer = 90;
+    const timerElement = document.getElementById('timer');
+    const countdown = setInterval(function () {
+        timer--;
+        timerElement.textContent = timer;
+        if (timer <= 0) {
+            clearInterval(countdown);
+            loadingScreen.style.display = 'none';
+            playScreen.style.display = 'block';
+        }
+    }, 1000);
+
+    // When the Play button is clicked, hide the play screen and show the quiz
+    document.getElementById('play-button').addEventListener('click', function () {
+        playScreen.style.display = 'none';
+        quizScreen.style.display = 'block';
+    });
+
+    // Fetch your questions here
+    makeQuestions().then(result => {
+        questions = result;
+        updateQuestion(0);
+    });
+};
+
+// Populate the list of cities
+
+
+
 getCoordinates();
 // makeQuestions();
+
+document.getElementById('restart-button').addEventListener('click', function () {
+    location.reload();
+});

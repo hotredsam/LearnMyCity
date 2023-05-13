@@ -9,23 +9,43 @@
 </head>
 
 <body>
-    
-    <h1>Location-based Trivia</h1>
-    
-    <script type="module" src="index.js"></script>
 
-    <div class="questionBox">
-        <progress id="file" value="32" max="100"> </progress>
 
-        <h2>this is where the quesiton will go</h2>
-        <div class="answersBox">
-            <p>this is where the answers will gof</p>
+    <div id="loading-screen" style="display: none;">
+        <h2>Loading...</h2>
+        <p id="timer">90</p>
+    </div>
+    <div id="play-screen" style="display: none;">
+        <button id="play-button">Play!</button>
+    </div>
+    <div id="quiz-screen" style="display: none;">
+        <h1>GeoGuesser</h1>
+
+        <script type="module" src="index.js"></script>
+
+        <div class="questionBox">
+            <progress id="file" value="32" max="100"> </progress>
+            <p id="score">Score: 0/0</p>
+
+            <h2>this is where the quesiton will go</h2>
+            <div class="answersBox">
+                <p>this is where the answers will gof</p>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button" id="next-question">Next Question</button>
         </div>
     </div>
-    <div class="button-container">
-        <button class="button" id="previous-question">Previous Question</button>
-        <button class="button" id="next-question">Next Question</button>
+
+    <div id="final-screen" style="display: none;">
+        <h1 id="final-score"></h1>
+        <button id="restart-button" class="button">Play Again</button>
+        <p>Today you have learned about these 10 cities near you:</p>
+        <ul id="cities-list"></ul>
     </div>
+
+
+
 </body>
 
 </html>
