@@ -1,0 +1,294 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "class.js",
+      "file_type": "code",
+      "source_file": "class.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "class",
+      "community": 2,
+      "norm_label": "class.js"
+    },
+    {
+      "label": "QuestionBlock",
+      "file_type": "code",
+      "source_file": "class.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "class_questionblock",
+      "community": 2,
+      "norm_label": "questionblock"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "class.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "class_questionblock_constructor",
+      "community": 2,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "index.js",
+      "file_type": "code",
+      "source_file": "index.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "index",
+      "community": 0,
+      "norm_label": "index.js"
+    },
+    {
+      "label": "updateCoordinates()",
+      "file_type": "code",
+      "source_file": "index.js",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "index_updatecoordinates",
+      "community": 0,
+      "norm_label": "updatecoordinates()"
+    },
+    {
+      "label": "getCoordinates()",
+      "file_type": "code",
+      "source_file": "index.js",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "index_getcoordinates",
+      "community": 0,
+      "norm_label": "getcoordinates()"
+    },
+    {
+      "label": "makeQuestions()",
+      "file_type": "code",
+      "source_file": "index.js",
+      "source_location": "L71",
+      "_origin": "ast",
+      "id": "index_makequestions",
+      "community": 0,
+      "norm_label": "makequestions()"
+    },
+    {
+      "label": "questions",
+      "file_type": "code",
+      "source_file": "index.js",
+      "source_location": "L126",
+      "_origin": "ast",
+      "id": "index_questions",
+      "community": 0,
+      "norm_label": "questions"
+    },
+    {
+      "label": "updateQuestion()",
+      "file_type": "code",
+      "source_file": "index.js",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "index_updatequestion",
+      "community": 0,
+      "norm_label": "updatequestion()"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "package",
+      "community": 1,
+      "norm_label": "package.json"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "package_dependencies",
+      "community": 1,
+      "norm_label": "dependencies"
+    },
+    {
+      "label": "dotenv",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "package_dependencies_dotenv",
+      "community": 1,
+      "norm_label": "dotenv"
+    },
+    {
+      "label": "http-server",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "package_dependencies_http_server",
+      "community": 1,
+      "norm_label": "http-server"
+    },
+    {
+      "label": "openai",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "package_dependencies_openai",
+      "community": 1,
+      "norm_label": "openai"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "class.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "class",
+      "target": "class_questionblock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "index",
+      "target": "class",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "class.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "class_questionblock",
+      "target": "class_questionblock_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "index",
+      "target": "index_getcoordinates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L71",
+      "weight": 1.0,
+      "source": "index",
+      "target": "index_makequestions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L126",
+      "weight": 1.0,
+      "source": "index",
+      "target": "index_questions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "index",
+      "target": "index_updatecoordinates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "index",
+      "target": "index_updatequestion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "index_getcoordinates",
+      "target": "index_updatecoordinates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "index.js",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "index_makequestions",
+      "target": "index_updatecoordinates",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "package",
+      "target": "package_dependencies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_dotenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_http_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "package_dependencies",
+      "target": "package_dependencies_openai",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "2bab49ff7a5363fafb30d7864a7e9d8c4e2eaf11"
+}
